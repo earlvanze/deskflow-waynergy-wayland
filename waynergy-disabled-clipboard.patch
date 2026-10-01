@@ -1,0 +1,8 @@
+--- a/src/clip.c
++++ b/src/clip.c
+@@ -8,3 +8,3 @@
+-int clipMonitorFd;
++int clipMonitorFd = -1;
+ struct sockaddr_un clipMonitorAddr;
+-pid_t clipMonitorPid[2];
++pid_t clipMonitorPid[2] = {-1, -1};

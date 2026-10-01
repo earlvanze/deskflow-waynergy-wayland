@@ -1,0 +1,9 @@
+# Waynergy generates a client keypair/certificate here. Never publish it.
+tls/
+
+# Preserve local overrides and editor/OS state.
+config.ini.local
+*.bak
+*.bak.*
+*.swp
+.DS_Store
