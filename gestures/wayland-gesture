@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+"""Small allowlisted gesture receiver for the logged-in Hyprland user."""
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+ACTIONS = {'left','right','up','down','launcher','desktop'}
+def main():
+    if len(sys.argv) != 2 or sys.argv[1] not in ACTIONS:
+        raise SystemExit('Expected left/right/up/down/launcher/desktop')
+    os.environ.setdefault('XDG_RUNTIME_DIR', '/run/user/%d' % os.getuid())
+    if not os.environ.get('HYPRLAND_INSTANCE_SIGNATURE'):
+        instances = json.loads(subprocess.check_output(['/usr/bin/hyprctl','instances','-j']))
+        if len(instances) != 1:
+            raise SystemExit('Expected exactly one Hyprland session')
+        os.environ['HYPRLAND_INSTANCE_SIGNATURE'] = instances[0]['instance']
+        os.environ['WAYLAND_DISPLAY'] = instances[0]['wl_socket']
+    def ctl(*args):
+        return subprocess.check_output(['/usr/bin/hyprctl', *args], text=True)
+    def focus(workspace):
+        ctl('dispatch', 'hl.dsp.focus({ workspace = ' + json.dumps(str(workspace)) + ' })')
+    action = sys.argv[1]
+    if action in ('left', 'right'):
+        focus('r+1' if action == 'left' else 'r-1')
+    elif action in ('up', 'launcher'):
+        subprocess.run(['/usr/bin/omarchy-menu','toggle','apps'], check=True)
+    else:
+        state = Path(os.environ['XDG_RUNTIME_DIR'])/'deskflow-gesture-desktop.json'
+        current = json.loads(ctl('activeworkspace','-j'))['id']
+        saved = json.loads(state.read_text()) if state.exists() else {}
+        if current == saved.get('desktop'):
+            focus(saved['previous'])
+            state.unlink()
+        else:
+            focus('empty')
+            desktop = json.loads(ctl('activeworkspace','-j'))['id']
+            state.write_text(json.dumps({'previous':current, 'desktop':desktop}))
+
+if __name__ == '__main__':
+    main()

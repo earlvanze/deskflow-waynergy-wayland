@@ -128,3 +128,28 @@ same time; use a single supervised service or the app, not both.
 ## License
 
 MIT. Deskflow and Waynergy are separate projects with their own licenses.
+
+## Brightness runs to minimum or maximum
+
+Some macOS Deskflow brightness presses contain key ID 57528/57529, but their
+releases contain ID 0 with raw button 146/145. Waynergy's ID mapping handles the
+press while the unmapped raw release is discarded as superfluous. The compositor
+then keeps repeating brightness as though the key were held.
+
+The template maps both raw buttons to the same XKB codes as the press IDs:
+
+```ini
+[raw-keymap]
+145 = 233
+146 = 232
+```
+
+Merge these lines into the existing section and restart Waynergy. Retain normal
+Omarchy brightness bindings; extra raw Hyprland bindings are unnecessary. Verify
+that each brightness press produces a matching `Keycode: 232/233, state 0` release.
+
+## Magic Trackpad gestures
+
+See [gesture setup and supported actions](gestures/README.md) for three- and
+four-finger desktop switching, app launcher and show-desktop actions, plus native
+Hyprland gestures for a directly connected trackpad.

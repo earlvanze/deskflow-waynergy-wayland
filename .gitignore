@@ -7,3 +7,7 @@ config.ini.local
 *.bak.*
 *.swp
 .DS_Store
+
+# Python gesture helper tests.
+__pycache__/
+*.pyc

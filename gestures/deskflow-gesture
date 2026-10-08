@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+"""Route recognized Mac gestures according to Deskflow's active screen."""
+import argparse
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+
+ACTIONS = {'left', 'right', 'up', 'down', 'launcher', 'desktop'}
+
+def active_screen(text):
+    current = None
+    for line in text.splitlines():
+        match = re.search(r'switch from "[^"]+" to "([^"]+)"', line)
+        if match:
+            current = match.group(1)
+        elif re.search(r'(disconnected|stopping server|started server|ERROR:)', line, re.I):
+            current = None
+    return current
+
+def command(config, action, screen):
+    target = config.get('clients', {}).get(screen)
+    if target:
+        # SSH destination is data, never evaluated as shell code.
+        if not re.fullmatch(r'[A-Za-z0-9_.@-]+', target) or target.startswith('-'):
+            raise ValueError('Invalid SSH destination')
+        return ['/usr/bin/ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=2',
+                '-o', 'StrictHostKeyChecking=yes', '-o', 'ControlMaster=auto',
+                '-o', 'ControlPersist=60', '-o', 'ControlPath=~/.ssh/gesture-%C',
+                target, '.local/bin/wayland-gesture', action]
+    if screen != config['server_screen']:
+        return None  # Never send a local action for another remote client.
+    codes = {'left':124, 'right':123, 'up':126, 'down':125}
+    if action in codes:
+        return ['/usr/bin/osascript', '-e', 'tell application "System Events" to key code %d using control down' % codes[action]]
+    if action == 'launcher':
+        return ['/usr/bin/open', '-a', 'Launchpad']
+    return ['/usr/bin/osascript', '-e', 'tell application "System Events" to key code 103']
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument('action', choices=sorted(ACTIONS))
+    p.add_argument('--config', type=Path, default=Path.home()/'.config/deskflow-gestures.json')
+    p.add_argument('--dry-run', action='store_true')
+    args = p.parse_args()
+    config = json.loads(args.config.read_text())
+    with Path(config['log']).expanduser().open('rb') as log:
+        log.seek(0, os.SEEK_END)
+        log.seek(max(0, log.tell()-131072))
+        screen = active_screen(log.read().decode('utf-8', errors='replace'))
+    cmd = command(config, args.action, screen)
+    if args.dry_run:
+        print(json.dumps({'screen':screen, 'command':cmd}))
+    elif cmd:
+        if subprocess.run(['/usr/bin/pgrep', '-x', 'deskflow-core'], stdout=subprocess.DEVNULL).returncode:
+            raise SystemExit('Deskflow is not running')
+        subprocess.run(cmd, check=True, timeout=8)
+
+if __name__ == '__main__':
+    main()
