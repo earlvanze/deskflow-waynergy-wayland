@@ -36,7 +36,7 @@ def command(config, action, screen):
     if action in codes:
         return ['/usr/bin/osascript', '-e', 'tell application "System Events" to key code %d using control down' % codes[action]]
     if action == 'launcher':
-        return ['/usr/bin/open', '-a', 'Launchpad']
+        return ['/usr/bin/osascript', '-e', 'tell application "System Events" to key code 49 using command down']
     return ['/usr/bin/osascript', '-e', 'tell application "System Events" to key code 103']
 
 def main():

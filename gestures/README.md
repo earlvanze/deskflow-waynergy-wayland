@@ -13,7 +13,7 @@ there is no new network listener.
 | Thumb + three fingers pinch | App launcher |
 | Thumb + three fingers spread | Empty desktop / restore |
 
-Mac-local swipes invoke Control+arrow shortcuts. Mac-local pinch opens Launchpad;
+Mac-local swipes invoke Control+arrow shortcuts. Mac-local pinch opens Spotlight;
 spread sends F11 (Show Desktop). These require the corresponding macOS shortcuts
 to be enabled. Two-finger scrolling and secondary clicks retain their existing
 Deskflow behavior. The bridge does not transport raw multitouch, continuous
@@ -59,7 +59,11 @@ preset is included so it can be disabled as a unit. Review overlapping BTT
 bindings and macOS gesture assignments if both systems respond to one swipe.
 Keep existing BTT configuration; do not replace its database.
 
-5. Run `~/.local/bin/deskflow-gesture left --dry-run` on the Mac to inspect the
+5. After enabling the BTT preset, run `python3 mac-system-gestures.py` on the
+   Mac. It saves only the affected preference keys, disables conflicting native
+   gestures, and restarts the Dock. Keyboard shortcuts stay available for the
+   local gesture actions. To roll back, run it with `--restore`.
+6. Run `~/.local/bin/deskflow-gesture left --dry-run` on the Mac to inspect the
    destination. With the pointer on Linux, swipe in both directions and verify
    that Mac Spaces stay unchanged. Test each finger count separately.
 
@@ -86,7 +90,8 @@ switched a workspace and show-desktop restored the previous workspace. BTT 2.428
 persisted all ten gesture/action mappings via its native importer. Physical
 finger recognition and local Mac shortcut behavior still require a hardware test.
 
-Disable the BTT preset to restore its prior gesture handling. Remove the
+Disable the BTT preset and run `python3 mac-system-gestures.py --restore`
+to restore prior Mac gesture handling. Remove the
 `require("hypr.gestures")` line to disable native Linux gestures. User-specific
 configuration, keys and recovery copies stay outside this repository.
 
