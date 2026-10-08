@@ -102,8 +102,8 @@
           "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 194,
-          "BTTGestureNotes": "Deskflow gesture routing: launcher",
-          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" launcher"
+          "BTTGestureNotes": "Deskflow gesture routing: restore-desktop",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" restore-desktop"
         },
         {
           "BTTTriggerType": 195,
@@ -113,8 +113,8 @@
           "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 195,
-          "BTTGestureNotes": "Deskflow gesture routing: desktop",
-          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" desktop"
+          "BTTGestureNotes": "Deskflow gesture routing: show-desktop",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" show-desktop"
         }
       ]
     }

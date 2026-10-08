@@ -10,11 +10,10 @@ there is no new network listener.
 | Three or four fingers left / right | Next / previous workspace |
 | Three or four fingers up | App launcher |
 | Three or four fingers down | Empty desktop; repeat to restore previous workspace |
-| Thumb + three fingers pinch | App launcher |
-| Thumb + three fingers spread | Empty desktop / restore |
+| Thumb + three fingers pinch inward | Restore previous windows |
+| Thumb + three fingers spread outward | Clear screen / show empty desktop |
 
-Mac-local swipes invoke Control+arrow shortcuts. Mac-local pinch opens Spotlight;
-spread sends F11 (Show Desktop). These require the corresponding macOS shortcuts
+Mac-local swipes invoke Control+arrow shortcuts. Mac-local pinch/spread sends F11 (Show Desktop toggle). These require the corresponding macOS shortcuts
 to be enabled. Two-finger scrolling and secondary clicks retain their existing
 Deskflow behavior. The bridge does not transport raw multitouch, continuous
 workspace animation, application pinch-to-zoom, or rotation. The launcher is not
@@ -74,7 +73,7 @@ For a trackpad paired directly to Linux, install `hyprland.lua` as
 `~/.config/hypr/gestures.lua` and add `require("hypr.gestures")` to the user
 `input.lua`. The receiver must still be installed for the up/down actions.
 This enables native three- and four-finger workspace gestures, four-finger
-pinch/spread for launcher/show desktop, natural scrolling,
+pinch/spread for restore/show desktop, natural scrolling,
 tap-to-click and finger-count secondary clicks. Three-finger dragging is disabled
 to avoid conflicting with three-finger swipes. Reload and validate:
 
@@ -108,7 +107,7 @@ works. On the Mac, the last 20 action-start/completion/failure events are in
 `~/.cache/deskflow-gesture-events.json`; this helps distinguish a gesture that
 was not recognized from an action that failed. It contains no keyboard text.
 After changing system pinch preferences, restart BetterTouchTool to refresh its
-recognizer. The launcher/show-desktop pair uses **thumb plus three fingers**;
+recognizer. The restore/show-desktop pair uses **thumb plus three fingers**;
 two-finger application zoom is not mapped by this bridge.
 
 ### Legacy BetterTouchTool action execution
@@ -123,3 +122,7 @@ If thumb-plus-three pinch/spread is never recognized, inspect Advanced Settings
 and preserve the old setting for rollback. Recognition failures and a workaround
 are discussed in the [BTT support thread](https://community.folivora.ai/t/launchpad-shortcut-with-trackpad-how-can-i-customise-it-or-disable-it-macos-26/45525/20).
 Physical recognition after this adjustment remains subject to hardware validation.
+
+On Linux, spreading repeatedly keeps the screen clear; pinching repeatedly after
+restoring does nothing. Swiping away from the empty desktop cancels the automatic
+return behavior so a later pinch does not unexpectedly switch workspaces.

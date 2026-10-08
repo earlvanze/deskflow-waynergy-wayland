@@ -9,7 +9,7 @@ import subprocess
 import sys
 import time
 
-ACTIONS = {'left', 'right', 'up', 'down', 'launcher', 'desktop'}
+ACTIONS = {'left', 'right', 'up', 'down', 'launcher', 'desktop', 'show-desktop', 'restore-desktop'}
 
 def active_screen(text):
     current = None

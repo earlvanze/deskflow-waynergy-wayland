@@ -6,10 +6,10 @@ from pathlib import Path
 import subprocess
 import sys
 
-ACTIONS = {'left','right','up','down','launcher','desktop'}
+ACTIONS = {'left','right','up','down','launcher','desktop','show-desktop','restore-desktop'}
 def main():
     if len(sys.argv) != 2 or sys.argv[1] not in ACTIONS:
-        raise SystemExit('Expected left/right/up/down/launcher/desktop')
+        raise SystemExit('Expected left/right/up/down/launcher/desktop/show-desktop/restore-desktop')
     os.environ.setdefault('XDG_RUNTIME_DIR', '/run/user/%d' % os.getuid())
     os.environ.setdefault('OMARCHY_PATH', '/usr/share/omarchy')
     os.environ.setdefault('DBUS_SESSION_BUS_ADDRESS', 'unix:path=' + os.environ['XDG_RUNTIME_DIR'] + '/bus')
@@ -30,12 +30,18 @@ def main():
     elif action in ('up', 'launcher'):
         subprocess.run(['/usr/bin/omarchy-menu','toggle','apps'], check=True)
     else:
+        subprocess.run(['/usr/bin/omarchy-menu', 'close'], check=True)
         state = Path(os.environ['XDG_RUNTIME_DIR'])/'deskflow-gesture-desktop.json'
         current = json.loads(ctl('activeworkspace','-j'))['id']
         saved = json.loads(state.read_text()) if state.exists() else {}
-        if current == saved.get('desktop'):
-            focus(saved['previous'])
-            state.unlink()
+        if action == 'restore-desktop':
+            if saved and current == saved.get('desktop'):
+                focus(saved['previous'])
+                state.unlink()
+        elif current == saved.get('desktop'):
+            if action != 'show-desktop':
+                focus(saved['previous'])
+                state.unlink()
         else:
             focus('empty')
             desktop = json.loads(ctl('activeworkspace','-j'))['id']

@@ -16,10 +16,10 @@ hl.config({ input = { touchpad = {
   drag_3fg = 0,
 } } })
 
--- Thumb plus three fingers: launcher / show desktop.
+-- Thumb plus three fingers: pinch restores; spread clears the desktop.
 hl.gesture({ fingers = 4, direction = "pinchin", action = function()
-  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/wayland-gesture launcher")
+  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/wayland-gesture restore-desktop")
 end })
 hl.gesture({ fingers = 4, direction = "pinchout", action = function()
-  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/wayland-gesture desktop")
+  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/wayland-gesture show-desktop")
 end })
