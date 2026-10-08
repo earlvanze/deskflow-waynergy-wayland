@@ -10,121 +10,111 @@
           "BTTTriggerType": 100,
           "BTTTriggerTypeDescription": "3 Finger Swipe Left",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" left",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 100,
-          "BTTGestureNotes": "Deskflow gesture routing: left"
+          "BTTGestureNotes": "Deskflow gesture routing: left",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" left"
         },
         {
           "BTTTriggerType": 101,
           "BTTTriggerTypeDescription": "3 Finger Swipe Right",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" right",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 101,
-          "BTTGestureNotes": "Deskflow gesture routing: right"
+          "BTTGestureNotes": "Deskflow gesture routing: right",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" right"
         },
         {
           "BTTTriggerType": 102,
           "BTTTriggerTypeDescription": "3 Finger Swipe Up",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" up",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 102,
-          "BTTGestureNotes": "Deskflow gesture routing: up"
+          "BTTGestureNotes": "Deskflow gesture routing: up",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" up"
         },
         {
           "BTTTriggerType": 103,
           "BTTTriggerTypeDescription": "3 Finger Swipe Down",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" down",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 103,
-          "BTTGestureNotes": "Deskflow gesture routing: down"
+          "BTTGestureNotes": "Deskflow gesture routing: down",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" down"
         },
         {
           "BTTTriggerType": 105,
           "BTTTriggerTypeDescription": "4 Finger Swipe Left",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" left",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 105,
-          "BTTGestureNotes": "Deskflow gesture routing: left"
+          "BTTGestureNotes": "Deskflow gesture routing: left",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" left"
         },
         {
           "BTTTriggerType": 106,
           "BTTTriggerTypeDescription": "4 Finger Swipe Right",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" right",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 106,
-          "BTTGestureNotes": "Deskflow gesture routing: right"
+          "BTTGestureNotes": "Deskflow gesture routing: right",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" right"
         },
         {
           "BTTTriggerType": 108,
           "BTTTriggerTypeDescription": "4 Finger Swipe Up",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" up",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 108,
-          "BTTGestureNotes": "Deskflow gesture routing: up"
+          "BTTGestureNotes": "Deskflow gesture routing: up",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" up"
         },
         {
           "BTTTriggerType": 107,
           "BTTTriggerTypeDescription": "4 Finger Swipe Down",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" down",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 107,
-          "BTTGestureNotes": "Deskflow gesture routing: down"
+          "BTTGestureNotes": "Deskflow gesture routing: down",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" down"
         },
         {
           "BTTTriggerType": 194,
           "BTTTriggerTypeDescription": "Pinch With Thumb And 3 Fingers",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" launcher",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 194,
-          "BTTGestureNotes": "Deskflow gesture routing: launcher"
+          "BTTGestureNotes": "Deskflow gesture routing: launcher",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" launcher"
         },
         {
           "BTTTriggerType": 195,
           "BTTTriggerTypeDescription": "Spread With Thumb And 3 Fingers",
           "BTTTriggerClass": "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType": 206,
-          "BTTPredefinedActionName": "Execute Shell Script / Task",
-          "BTTShellTaskActionScript": "\"$HOME/.local/bin/deskflow-gesture\" desktop",
-          "BTTShellTaskActionConfig": "/bin/bash:::-c:::-:::",
+          "BTTPredefinedActionType": 137,
+          "BTTPredefinedActionName": "Execute Terminal Command (Background)",
           "BTTEnabled": 1,
           "BTTOrder": 195,
-          "BTTGestureNotes": "Deskflow gesture routing: desktop"
+          "BTTGestureNotes": "Deskflow gesture routing: desktop",
+          "BTTTerminalCommand": "\"$HOME/.local/bin/deskflow-gesture\" desktop"
         }
       ]
     }

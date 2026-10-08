@@ -54,8 +54,9 @@ subprocess.run(['open', 'btt://jsonimport/' + base64.b64encode(p.read_bytes()).d
 PY
 ```
 
-Import once. Repeated trigger-only imports can duplicate gestures. A complete
-preset is included so it can be disabled as a unit. Review overlapping BTT
+Import once. Legacy BTT can duplicate even complete presets with the same UUID.
+When replacing a preset, disable the previous copy so exactly one is active.
+A complete preset is included so it can be disabled as a unit. Review overlapping BTT
 bindings and macOS gesture assignments if both systems respond to one swipe.
 Keep existing BTT configuration; do not replace its database.
 
@@ -109,3 +110,16 @@ was not recognized from an action that failed. It contains no keyboard text.
 After changing system pinch preferences, restart BetterTouchTool to refresh its
 recognizer. The launcher/show-desktop pair uses **thumb plus three fingers**;
 two-finger application zoom is not mapped by this bridge.
+
+### Legacy BetterTouchTool action execution
+
+The preset uses background terminal action **137**, not shell-task action 206.
+On the initial BTT 2.428 deployment, its shell-task XPC runner reported an error
+before the router wrote any diagnostic event. Merely testing the router through
+SSH does not validate execution through BetterTouchTool.
+
+If thumb-plus-three pinch/spread is never recognized, inspect Advanced Settings
+→ Trackpad → Thumb/Palm Handling. Disable palm recognition for a controlled test
+and preserve the old setting for rollback. Recognition failures and a workaround
+are discussed in the [BTT support thread](https://community.folivora.ai/t/launchpad-shortcut-with-trackpad-how-can-i-customise-it-or-disable-it-macos-26/45525/20).
+Physical recognition after this adjustment remains subject to hardware validation.
