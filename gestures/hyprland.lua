@@ -15,3 +15,11 @@ hl.config({ input = { touchpad = {
   tap_to_click = true,
   drag_3fg = 0,
 } } })
+
+-- Thumb plus three fingers: launcher / show desktop.
+hl.gesture({ fingers = 4, direction = "pinchin", action = function()
+  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/wayland-gesture launcher")
+end })
+hl.gesture({ fingers = 4, direction = "pinchout", action = function()
+  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/wayland-gesture desktop")
+end })

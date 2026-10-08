@@ -11,6 +11,9 @@ def main():
     if len(sys.argv) != 2 or sys.argv[1] not in ACTIONS:
         raise SystemExit('Expected left/right/up/down/launcher/desktop')
     os.environ.setdefault('XDG_RUNTIME_DIR', '/run/user/%d' % os.getuid())
+    os.environ.setdefault('OMARCHY_PATH', '/usr/share/omarchy')
+    os.environ.setdefault('DBUS_SESSION_BUS_ADDRESS', 'unix:path=' + os.environ['XDG_RUNTIME_DIR'] + '/bus')
+    os.environ['PATH'] = os.environ['OMARCHY_PATH'] + '/bin:' + os.environ.get('PATH', '/usr/bin:/bin')
     if not os.environ.get('HYPRLAND_INSTANCE_SIGNATURE'):
         instances = json.loads(subprocess.check_output(['/usr/bin/hyprctl','instances','-j']))
         if len(instances) != 1:

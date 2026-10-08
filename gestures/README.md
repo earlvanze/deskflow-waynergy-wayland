@@ -72,7 +72,8 @@ Keep existing BTT configuration; do not replace its database.
 For a trackpad paired directly to Linux, install `hyprland.lua` as
 `~/.config/hypr/gestures.lua` and add `require("hypr.gestures")` to the user
 `input.lua`. The receiver must still be installed for the up/down actions.
-This enables native three- and four-finger workspace gestures, natural scrolling,
+This enables native three- and four-finger workspace gestures, four-finger
+pinch/spread for launcher/show desktop, natural scrolling,
 tap-to-click and finger-count secondary clicks. Three-finger dragging is disabled
 to avoid conflicting with three-finger swipes. Reload and validate:
 
@@ -99,3 +100,12 @@ Sources: [Deskflow multitouch discussion](https://github.com/deskflow/deskflow/d
 [BTT URL import](https://docs.folivora.ai/docs/scripting/url-scheme/),
 [BTT gesture IDs](https://docs.folivora.ai/docs/json/trigger-definitions/),
 [Hyprland gestures](https://wiki.hypr.land/Configuring/Advanced-and-Cool/Gestures/).
+
+The Linux receiver reconstructs the Omarchy, D-Bus and display environment for
+SSH sessions. Launcher actions require this even when workspace switching already
+works. On the Mac, the last 20 action-start/completion/failure events are in
+`~/.cache/deskflow-gesture-events.json`; this helps distinguish a gesture that
+was not recognized from an action that failed. It contains no keyboard text.
+After changing system pinch preferences, restart BetterTouchTool to refresh its
+recognizer. The launcher/show-desktop pair uses **thumb plus three fingers**;
+two-finger application zoom is not mapped by this bridge.

@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import time
 
 ACTIONS = {'left', 'right', 'up', 'down', 'launcher', 'desktop'}
 
@@ -39,6 +40,19 @@ def command(config, action, screen):
         return ['/usr/bin/osascript', '-e', 'tell application "System Events" to key code 49 using command down']
     return ['/usr/bin/osascript', '-e', 'tell application "System Events" to key code 103']
 
+def record_event(action, status):
+    path = Path.home()/'.cache/deskflow-gesture-events.json'
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            events = json.loads(path.read_text())
+        except (FileNotFoundError, ValueError):
+            events = []
+        events.append({'time': time.time(), 'action': action, 'status': status})
+        path.write_text(json.dumps(events[-20:]))
+    except OSError:
+        pass
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('action', choices=sorted(ACTIONS))
@@ -56,7 +70,15 @@ def main():
     elif cmd:
         if subprocess.run(['/usr/bin/pgrep', '-x', 'deskflow-core'], stdout=subprocess.DEVNULL).returncode:
             raise SystemExit('Deskflow is not running')
-        subprocess.run(cmd, check=True, timeout=8)
+        record_event(args.action, 'started')
+        try:
+            subprocess.run(cmd, check=True, timeout=8)
+        except (subprocess.SubprocessError, OSError):
+            record_event(args.action, 'failed')
+            raise
+        record_event(args.action, 'completed')
+    else:
+        record_event(args.action, 'no-matching-screen')
 
 if __name__ == '__main__':
     main()
